@@ -1,0 +1,132 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.options {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+}
+
+.option {
+    flex: 1;
+    margin: 0 10px;
+}
+
+.btn {
+    padding: 15px 25px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-success {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
+.btn:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1qpx solid #ddd;
+    border-radius: 4px;
+}
+
+.card {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 15px;
+}
+
+.card-title {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    margin-bottom: 5px;
+}
+
+.alert {
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 4px;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.quiz-container {
+    margin-top: 30px;
+}
+
+.flag-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.flag-img {
+    max-width: 300px;
+    max-height: 200px;
+}
+
+.result-container {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.result-text {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.back-link {
+    margin-top: 20px;
+    text-align: center;
+}
