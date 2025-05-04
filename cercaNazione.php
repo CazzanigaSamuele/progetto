@@ -1,5 +1,5 @@
 <?php
-session_start();
+session_start(); // Inizia la sessione
 ?>
 
 <!DOCTYPE html>
@@ -7,51 +7,52 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Country</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <title>Cerca nazione</title> <!-- Titolo della pagina -->
+    <link rel="stylesheet" href="css/styles.css"> <!-- Link al file CSS -->
     <script>
-        async function cercaNazione() {
-            let nazione = document.getElementById("nazione").value;
-            if (nazione == "") {
-                alert('Nome non valido');
+        async function cercaNazione() { // Funzione per cercare una nazione
+            let nazione = document.getElementById("nazione").value; // Ottiene il valore dell'input
+            if (nazione == "") { // Controlla se l'input è vuoto
+                alert('Nome non valido'); // Visualizza un alert
                 return;
             }
 
-            // Build the API URL
+            // Costruisce l'URL dell'API utilizzando il nome della nazione
             const apiUrl = "https://restcountries.com/v3.1/name/" + encodeURIComponent(nazione);
 
             try {
-                // Make the API request
+                // Effettua una richiesta all'API
                 let risposta = await fetch(apiUrl);
 
-                // Check if the request was successful
+                // Controlla se la richiesta è andata a buon fine
                 if (!risposta.ok) {
-                    throw new Error('richiesta API fallita');
+                    throw new Error('richiesta API fallita'); // Gestisce l'errore
                 }
 
-                // Decode the JSON response
+                // Decodifica la risposta JSON
                 let data = await risposta.json();
 
-                // Display the results
+                // Visualizza i risultati
                 let divRisultato = document.getElementById("risultato");
-                divRisultato.innerHTML = ''; // Clear previous results
+                divRisultato.innerHTML = ''; // Pulisce i risultati precedenti
 
-                if (data.length == 0) {
+                if (data.length == 0) { // Controlla se ci sono risultati
                     const p = document.createElement('p');
-                    p.textContent = 'Paese non trovato';
+                    p.textContent = 'Paese non trovato'; // Visualizza un messaggio
                     divRisultato.appendChild(p);
                     return;
                 }
 
+                // Ciclo attraverso i risultati e li visualizza
                 for (const country of data) {
-                    // Create container div for country info
+                    // Crea un contenitore per le informazioni sulla nazione
                     let divNazione = document.createElement('div');
                     divNazione.style.marginBottom = '20px';
                     divNazione.style.padding = '10px';
                     divNazione.style.border = '1px solid #ddd';
                     divNazione.style.borderRadius = '5px';
 
-
+                    // Crea e aggiunge elementi per le informazioni sulla nazione
                     let nameH3 = document.createElement('h3');
                     nameH3.textContent = country.name.common;
                     divNazione.appendChild(nameH3);
@@ -60,26 +61,9 @@ session_start();
                     capitalP.textContent = "Capitale: "+country.capital;
                     divNazione.appendChild(capitalP);
 
-                    let regionP = document.createElement('p');
-                    regionP.textContent = `Region: ${country.region}`;
-                    divNazione.appendChild(regionP);
+                    // Aggiunge altre informazioni sulla nazione...
 
-                    let populationP = document.createElement('p');
-                    populationP.textContent = `Population: ${country.population.toLocaleString()}`;
-                    divNazione.appendChild(populationP);
-
-                    let areaP = document.createElement('p');
-                    areaP.textContent = `Area: ${country.area ? country.area.toLocaleString() + ' km²' : 'No area data'}`;
-                    divNazione.appendChild(areaP);
-
-                    let currenciesP = document.createElement('p');
-                    currenciesP.textContent = `Currencies: ${Object.values(country.currencies || {}).map(c => c.name).join(', ') || 'No currency data'}`;
-                    divNazione.appendChild(currenciesP);
-
-                    let languagesP = document.createElement('p');
-                    languagesP.textContent = `Languages: ${Object.values(country.languages || {}).join(', ') || 'No language data'}`;
-                    divNazione.appendChild(languagesP);
-
+                    // Aggiunge l'immagine della bandiera
                     let flagImg = document.createElement('img');
                     flagImg.src = country.flags.png;
                     flagImg.alt = `${country.name.common} flag`;
@@ -88,23 +72,24 @@ session_start();
                     flagImg.style.marginTop = '10px';
                     divNazione.appendChild(flagImg);
 
-                    // Add country info to result container
+                    // Aggiunge le informazioni alla pagina
                     divRisultato.appendChild(divNazione);
                 }
 
             } catch (error) {
-                alert('Error searching country. Please try again.');
+                alert('Error searching country. Please try again.'); // Gestisce gli errori
             }
         }
     </script>
 </head>
 <body>
-    <h2>Cerca nazione:</h2>
+    <h2>Cerca nazione:</h2> <!-- Titolo -->
+    <!-- Etichetta e input per la ricerca -->
     <label for="nazione">Nome nazione:</label>
     <input type="text" name="nazione" id="nazione">
-    <button type="button" onclick="cercaNazione()">Cerca</button>
-    <div id="risultato"></div>
+    <button type="button" onclick="cercaNazione()">Cerca</button> <!-- Pulsante per cercare -->
+    <div id="risultato"></div> <!-- Contenitore per i risultati -->
 
-    <p><a href="index.php">Torna all'index</a></p>
+    <p><a href="index.php">Torna all'index</a></p> <!-- Link per tornare all'index -->
 </body>
 </html>

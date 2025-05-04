@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gioco Finito</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Gioco Finito</title> <!-- Titolo della pagina -->
+    <link rel="stylesheet" href="styles.css"> <!-- Link al file CSS -->
     <style>
+        /* Stile aggiuntivo */
         .game-over {
             text-align: center;
             margin-top: 50px;
@@ -23,10 +24,12 @@
 <body>
     <div class="container">
         <div class="game-over">
-            <h1>Gioco Finito!</h1>
+            <h1>Gioco Finito!</h1> <!-- Titolo -->
+            <!-- Visualizza il punteggio -->
             <div class="score">
                 Punteggio: <?php echo isset($_GET['score']) ? htmlspecialchars($_GET['score']) : '0'; ?>
             </div>
+            <!-- Visualizza un'immagine in base al punteggio -->
             <div class="image">
                 <?php
                 $score = isset($_GET['score']) ? (int)$_GET['score'] : 0;
@@ -42,6 +45,7 @@
                 }
                 ?>
             </div>
+            <!-- Visualizza un messaggio in base al punteggio -->
             <div class="message">
                 <?php
                 if ($score >= 20) {
@@ -55,6 +59,7 @@
                 }
                 ?>
             </div>
+            <!-- Bottone per riprovare -->
             <div class="restart">
                 <a href="quizPopolazioni.php">Riprova</a>
             </div>

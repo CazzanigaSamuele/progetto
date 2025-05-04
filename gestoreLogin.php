@@ -1,31 +1,29 @@
 <?php
+    session_start(); // Inizia la sessione
+    include "conn.php"; // Include il file di connessione al database
 
-session_start();
-include_once "../classi/GestoreQuery.php";
+    // Recupera i dati GET (username e password)
+    $username = $_GET["username"];
+    $password = $_GET["password"];
 
+    // Hash della password
+    $passwordHash=md5($password);
 
+    // Query per selezionare l'utente dal database
+    $query="SELECT * FROM `utenti` WHERE username='$username' && password='$passwordHash';";
+    $risultato=$conn->query($query);
 
-// Recupera i dati GET
-$username = $_GET["username"];
-$password = $_GET["password"];
-
-$passwordHash=md5($password);
-
-
-// Query parametrizzata per evitare iniezioni SQL
-$stmt = $conn->prepare("SELECT * FROM utenti WHERE username = ? AND password= ?");
-$stmt->bind_param("s", $username);
-$stmt->execute();
-$result = $stmt->get_result();
-
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-
-    $_SESSION['username'] = $username;
-    $_SESSION['autenticato'] = true;
-    header("Location: paginaPrincipale.php");
-
-} else {
-    echo "Utente non trovato";
-}
+    // Controlla se l'utente esiste
+    if($risultato->num_rows>0){
+        // Imposta le variabili di sessione
+        $_SESSION["autenticato"]=true;
+        $_SESSION["username"]=$username;
+        // Reindirizza all'pagina principale
+        header("Location: paginaPrincipale.php"); 
+        exit;
+    }else{
+        // Reindirizza alla pagina di login con un messaggio di errore
+        header("Location:login.php?messaggio=credenziali errate!");
+        exit;
+    }
 ?>
